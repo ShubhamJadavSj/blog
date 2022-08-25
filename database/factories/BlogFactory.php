@@ -18,7 +18,8 @@ class BlogFactory extends Factory
     {
         return [
             'title' => $this->faker->word,
-            'description' => $this->faker->sentence
+            'description' => $this->faker->paragraph,
+            'published_at' => $this->faker->dateTime
         ];
     }
 }
