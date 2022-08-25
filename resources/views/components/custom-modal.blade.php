@@ -4,12 +4,12 @@
 $id = $id ?? md5($attributes->wire('model'));
 
 $maxWidth = [
-    'sm' => 'sm:max-w-sm',
-    'md' => 'sm:max-w-md',
-    'lg' => 'sm:max-w-lg',
-    'xl' => 'sm:max-w-xl',
-    '2xl' => 'sm:max-w-2xl',
-][$maxWidth ?? '2xl'];
+    'sm' => 'max-w-sm',
+    'md' => 'max-w-md',
+    'lg' => 'max-w-lg',
+    'xl' => 'max-w-xl',
+    '2xl' => 'max-w-2xl',
+][$maxWidth ?? 'sm'];
 @endphp
 
 <div
@@ -31,7 +31,7 @@ $maxWidth = [
         x-transition:leave-end="opacity-0">
     </div>
 
-    <div x-cloak x-show="show" class="fixed top-1/2 left-1/2 z-20 w-11/12 md:w-full max-w-lg transform -translate-x-1/2 -translate-y-1/2"
+    <div x-cloak x-show="show" class="fixed top-1/2 left-1/2 z-20 w-11/12 md:w-full transform -translate-x-1/2 -translate-y-1/2 {{$maxWidth}}"
         x-transition:enter="transition transform ease-in duration-150"
         x-transition:enter-start="transform opacity-0 scale-90"
         x-transition:enter-end="transform opacity-100 scale-100"
