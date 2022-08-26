@@ -39,22 +39,29 @@ class Index extends Component
         $this->reset('search', 'created_at');
     }
 
+    public function archive(Blog $blog)
+    {
+        $blog->delete();
+    }
+
+    public function delete($blogId)
+    {
+        Blog::withTrashed()->find($blogId)->forceDelete();
+    }
+
+    public function publish(Blog $blog)
+    {
+        $blog->published_at = now();
+        $blog->save();
+    }
+
     public function render()
     {
-        request()->merge($this->only(['sort_by', 'sort_type']));
+        request()->merge($this->only(['search', 'created_at', 'sort_by', 'sort_type']));
 
         $blogs = Blog::byAuthUser()
-            ->where(function($query) {
-                $query->when($this->search, function($query) {
-                    $query->where('title', 'like', "%$this->search%");
-                })
-                ->when($this->created_at, function($query) {
-                    $query->whereDate('created_at', $this->created_at);
-                });
-            })
-            ->when($this->sort_by, function ($query) {
-                $query->orderby($this->sort_by, $this->sort_type);
-            })
+            ->filter()
+            ->withTrashed()
             ->paginate(PER_PAGE);
 
         return view('livewire.blog.index', compact('blogs'));

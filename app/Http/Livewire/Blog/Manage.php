@@ -36,7 +36,7 @@ class Manage extends Component
     {
         $this->blog = !$blog ? new Blog() : $blog;
 
-        $this->editMode = $blog->exists();
+        $this->editMode = $blog->exists;
 
         $this->show = true;
     }
@@ -50,9 +50,11 @@ class Manage extends Component
         $this->close();
 
         $this->resetErrorBag();
-        $this->reset('editMode');
 
         $this->emitUp('refresh');
+
+        $this->toastNotify($this->editMode ? 'Blog updated successfully!' : 'Blog created successfully!');
+        $this->reset('editMode');
     }
 
     public function render()

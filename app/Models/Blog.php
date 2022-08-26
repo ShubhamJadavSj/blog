@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use App\Filters\BlogFilters;
 
 class Blog extends Model
 {
@@ -37,5 +38,15 @@ class Blog extends Model
     public function scopeByAuthUser($query)
     {
         return $query->where('creator_id', auth()->id());
+    }
+
+    public function scopePublished($query)
+    {
+        return $query->whereNotNull('published_at');
+    }
+
+    public function scopeFilter($query)
+    {
+        return resolve(BlogFilters::class)->apply($query);
     }
 }

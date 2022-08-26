@@ -18,7 +18,7 @@ class BlogPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return true;
     }
 
     /**
@@ -30,7 +30,7 @@ class BlogPolicy
      */
     public function view(User $user, Blog $blog)
     {
-        //
+        return true;
     }
 
     /**
@@ -41,7 +41,7 @@ class BlogPolicy
      */
     public function create(User $user)
     {
-        //
+        return $user->exists();
     }
 
     /**
@@ -53,7 +53,7 @@ class BlogPolicy
      */
     public function update(User $user, Blog $blog)
     {
-        //
+        return $blog->creator->is($user) && !$blog->trashed() && !$blog->published_at;
     }
 
     /**
@@ -65,7 +65,7 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog)
     {
-        //
+        return $blog->creator->is($user) && !$blog->trashed();
     }
 
     /**
@@ -77,7 +77,7 @@ class BlogPolicy
      */
     public function restore(User $user, Blog $blog)
     {
-        //
+        return $blog->creator->is($user) && $blog->trashed();
     }
 
     /**
@@ -89,6 +89,11 @@ class BlogPolicy
      */
     public function forceDelete(User $user, Blog $blog)
     {
-        //
+        return $blog->creator->is($user) && $blog->trashed();
+    }
+
+    public function publish(User $user, Blog $blog)
+    {
+        return $blog->creator->is($user) && !$blog->trashed() && !$blog->published_at;
     }
 }

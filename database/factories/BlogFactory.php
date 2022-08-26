@@ -19,7 +19,7 @@ class BlogFactory extends Factory
         return [
             'title' => $this->faker->word,
             'description' => $this->faker->paragraph,
-            'published_at' => $this->faker->dateTime
+            'published_at' => rand(0,1) ? $this->faker->dateTime : null
         ];
     }
 }
