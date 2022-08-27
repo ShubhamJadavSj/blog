@@ -20,7 +20,6 @@ $maxWidth = [
     <div x-cloak
         x-show="show"
         x-on:click="show = false"
-        @click="show=false"
         class="fixed inset-0 z-20 bg-black bg-opacity-75"
         x-on:keydown.escape.window="show = false"
         x-transition:enter="transition transform ease-in duration-150"

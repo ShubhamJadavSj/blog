@@ -59,6 +59,13 @@ class User extends Authenticatable
         'profile_photo_url',
     ];
 
+    protected static function booted()
+    {
+        static::deleting(function ($user) {
+            $user->blogs()->forceDelete();
+        });
+    }
+
     public function blogs()
     {
         return $this->hasMany(Blog::class, 'creator_id');
