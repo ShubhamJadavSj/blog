@@ -39,22 +39,6 @@ class Index extends Component
         $this->reset('search', 'created_at');
     }
 
-    public function archive(Blog $blog)
-    {
-        $blog->delete();
-    }
-
-    public function delete($blogId)
-    {
-        Blog::withTrashed()->find($blogId)->forceDelete();
-    }
-
-    public function publish(Blog $blog)
-    {
-        $blog->published_at = now();
-        $blog->save();
-    }
-
     public function render()
     {
         request()->merge($this->only(['search', 'created_at', 'sort_by', 'sort_type']));

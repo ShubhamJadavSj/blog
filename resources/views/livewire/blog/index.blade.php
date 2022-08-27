@@ -36,11 +36,11 @@
                     </thead>
                     <tbody class="divide-y divide-gray-200 bg-white">
                         @forelse ($blogs as $blog)
-                            <tr class="{{ $blog->trashed() ? 'opacity-50' : '' }}">
-                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6">{{ $blog->title }}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $blog->published_at ? $blog->published_at->diffForHumans() : '-'}}</td>
-                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500">{{ $blog->created_at->format('d M Y') }}</td>
-                                <td class="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6">
+                            <tr>
+                                <td class="whitespace-nowrap py-4 pl-4 pr-3 text-sm font-medium text-gray-900 sm:pl-6 {{ $blog->trashed() ? 'opacity-50 bg-red-100' : '' }}">{{ $blog->title }}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $blog->trashed() ? 'opacity-50 bg-red-100' : '' }}">{{ $blog->published_at ? $blog->published_at->diffForHumans() : '-'}}</td>
+                                <td class="whitespace-nowrap px-3 py-4 text-sm text-gray-500 {{ $blog->trashed() ? 'opacity-50 bg-red-100' : '' }}">{{ $blog->created_at->format('d M Y') }}</td>
+                                <td class="relative py-4 pl-3 pr-4 text-right text-sm font-medium sm:pr-6 {{ $blog->trashed() ? 'bg-red-100/50' : '' }}">
                                     <div class="flex justify-end items-center space-x-4">
                                         @can('update', $blog)
                                             <button wire:click="$emit('openBlogModal', {{ $blog }})" class="text-indigo-600 hover:text-indigo-800 cursor-pointer"> {{-- archive => disabled --}}

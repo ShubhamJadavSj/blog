@@ -19,19 +19,19 @@
             class="w-full max-w-sm rounded-lg shadow-lg pointer-events-auto overflow-hidden">
             <div
                 :class="{
-                    'bg-primary border-primary': message.type === 'success',
-                    'bg-error border-error': message.type === 'error',
-                    'bg-info border-info': message.type === 'info',
-                    'bg-warning border-warning': message.type === 'warning',
+                    'border-green-500 bg-green-100 ': message.type === 'success',
+                    'border-red-500 bg-red-100': message.type === 'error',
+                    'border-sky-500 bg-sky-100': message.type === 'info',
+                    'border-yellow-500 bg-yellow-100': message.type === 'warning',
                 }"
-                class="w-full max-w-sm p-4 border-l-4 overflow-hidden text-white pointer-events-auto"
+                class="w-full max-w-sm p-4 border-l-4 overflow-hidden text-white pointer-events-auto bg-white"
             >
-                <div class="flex items-start justify-between space-x-2">
+                <div class="flex items-center justify-between space-x-2">
                     <div>
-                        <h3 x-text="message.title" class="flex-grow font-semibold"></h3>
-                        <p x-text="message.message" class="text-sm font-normal text-white break-all"></p>
+                        <h3 class="text-black" x-text="message.title" class="flex-grow font-semibold"></h3>
+                        <p class="text-black text-sm" x-text="message.message" class="text-sm font-normal"></p>
                     </div>
-                    <div class="flex-shrink-0">
+                    <div class="flex items-center">
                         <button @click="remove(message)"
                                 :class="{
                                     'bg-primary border-primary': message.type === 'success',
@@ -39,7 +39,7 @@
                                     'bg-info border-info': message.type === 'info',
                                     'bg-warning border-warning': message.type === 'warning',
                                 }"  class="inline-flex text-white focus:outline-none">
-                            <svg class="stroke-current w-4 h-4" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"/><path d="M18 6 6 18M6 6l12 12"/></svg>
+                            <svg class="stroke-current text-black w-4 h-4" fill="transparent" viewBox="0 0 24 24" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M0 0h24v24H0z" stroke="none"/><path d="M18 6 6 18M6 6l12 12"/></svg>
                         </button>
                     </div>
                 </div>
